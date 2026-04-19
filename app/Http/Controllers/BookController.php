@@ -14,7 +14,7 @@ class BookController extends Controller
     {
         return view('book.index', [
             'title' => 'Book',
-            'books' => Book::all(),
+            'books' => Book::latest()->get(),
         ]);
     }
 
@@ -120,6 +120,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete($book);
+        return to_route('book.index')->withSuccess('Data Buku Berhasil Dihapus');
     }
 }
