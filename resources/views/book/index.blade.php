@@ -1,6 +1,12 @@
 <x-app>
 
-    <x-slot:title>Book</x-slot>
+    <x-slot:title>{{ $title }}</x-slot>
 
-    <h1 class="fw-bold">Data Book</h1>
+    <ul class="list-group">
+        @foreach ($books as $book)
+            <li class="list-group-item">{{ $loop->iteration }}. {{ $book->title }} -- {{ $book->author }} --
+                {{ $book->publisher }} --
+                {{ $book->year }} -- {{ $book->isbn }} -- {{ $book->stock }}</li>
+        @endforeach
+    </ul>
 </x-app>

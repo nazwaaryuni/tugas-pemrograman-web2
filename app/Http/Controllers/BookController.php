@@ -12,7 +12,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return view('book.index', [
+            'title' => 'Book',
+            'books' => Book::all(),
+        ]);
     }
 
     /**
