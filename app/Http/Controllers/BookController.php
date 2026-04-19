@@ -74,7 +74,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('book.edit', [
+            'title' => 'Edit Book',
+            'book' => $book,
+        ]);
     }
 
     /**
@@ -82,7 +85,34 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $validated = $request->validate([
+        'title' => 'required|max:255',
+        'author' => 'required|max:255',
+        'publisher' => 'required|max:255',
+        'year' => 'required|integer|min:1000|max:9999',
+        'isbn' => 'required|integer|unique:books,isbn,' . $book->id,
+        'stock' => 'required|integer|min:0'
+    ], [
+        'title.required'     => 'Judul buku wajib diisi',
+        'title.max'          => 'Judul buku tidak boleh lebih dari :max karakter',
+        'author.required'    => 'Penulis wajib diisi',
+        'author.max'         => 'Penulis tidak boleh lebih dari :max karakter',
+        'publisher.required' => 'Penerbit wajib diisi',
+        'publisher.max'      => 'Penerbit tidak boleh lebih dari :max karakter',
+        'year.required'      => 'Tahun terbit wajib diisi',
+        'year.integer'       => 'Tahun terbit harus berupa angka',
+        'year.min'           => 'Tahun terbit minimal :min',
+        'year.max'           => 'Tahun terbit maksimal :max',
+        'isbn.required'      => 'ISBN wajib diisi',
+        'isbn.integer'       => 'ISBN harus berupa angka',
+        'isbn.unique'        => 'ISBN sudah terdaftar',
+        'stock.required'     => 'Stok wajib diisi',
+        'stock.integer'      => 'Stok harus berupa angka',
+        'stock.min'          => 'Stok tidak boleh kurang dari :min',
+    ]);
+
+    $book->update($validated);
+    return to_route('book.index')->withSuccess('Data Buku Berhasil Diubah');
     }
 
     /**
