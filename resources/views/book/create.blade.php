@@ -54,6 +54,6 @@
             @enderror
         </div>
         <a class="btn btn-warning" href="{{ route('book.index') }}" role="button">Cancel</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </x-app>

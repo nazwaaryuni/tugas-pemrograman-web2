@@ -11,8 +11,8 @@
 
 <body>
     {{-- PAGE TITLE --}}
-    <div class="bg-warning py-5 text-center text-secondary">
-        <h1 class="fw-bod">{{ $title }}</h1>
+    <div class="bg-primary py-5 text-center text-white">
+        <h1 class="fw-bold">{{ $title }}</h1>
     </div>
 
     {{-- MAIN APP --}}

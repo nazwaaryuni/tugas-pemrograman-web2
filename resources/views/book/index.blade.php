@@ -8,7 +8,7 @@
         </div>
     @endsession
 
-    <a class="btn btn-warning mb-3" href="{{ route('book.create') }}" role="button">Create</a>
+    <a class="btn btn-success mb-3" href="{{ route('book.create') }}" role="button">Create</a>
 
     <ul class="list-group">
         @foreach ($books as $book)
