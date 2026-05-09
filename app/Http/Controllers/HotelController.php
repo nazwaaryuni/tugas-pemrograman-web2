@@ -10,10 +10,21 @@ class HotelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+{
+    $hotels = Hotel::latest();
+    $keyword = request('keyword');
+
+    if ($keyword) {
+        $hotels->where('name', 'like', '%' . $keyword . '%')
+               ->orWhere('city', 'like', '%' . $keyword . '%');
     }
+    
+    return view('hotel.index', [
+        'title' => 'Hotel',
+        'hotels' => $hotels->paginate(2)->withQueryString(),
+    ]);
+}
 
     /**
      * Show the form for creating a new resource.

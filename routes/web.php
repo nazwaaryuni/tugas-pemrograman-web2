@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'index']);
@@ -16,3 +17,5 @@ Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('book.edi
 Route::put('/book/{book}', [BookController::class, 'update'])->name('book.update');
 
 Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+
+Route::resource('/hotel', HotelController::class);
