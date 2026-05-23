@@ -22,6 +22,7 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" href="{{ route('customer.index') }}">Customer</a>
                     <a class="nav-link active" href="{{ route('hotel.index') }}">Hotel</a>
+                    <a class="nav-link active" href="{{ route('room.index') }}">Room</a>
                 </div>
             </div>
         </div>

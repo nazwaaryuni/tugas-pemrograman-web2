@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,5 @@ Route::put('/customer/{customer}', [CustomerController::class, 'update'])->name(
 Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 
 Route::resource('/hotel', HotelController::class);
+
+Route::resource('/room', RoomController::class);
