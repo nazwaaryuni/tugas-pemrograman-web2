@@ -106,6 +106,7 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        //
+        $hotel->delete();
+        return to_route('hotel.index')->withSuccess('Data Hotel Berhasil Dihapus');
     }
 }

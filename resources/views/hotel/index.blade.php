@@ -49,6 +49,7 @@
                                 onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini?')">Delete</button>
                         </form>
                     </td>
+
                 </tr>
             @endforeach
         </tbody>
