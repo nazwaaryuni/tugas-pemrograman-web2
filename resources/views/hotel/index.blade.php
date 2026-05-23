@@ -1,5 +1,4 @@
 <x-app>
-
     <x-slot:title>{{ $title }}</x-slot>
 
     @session('success')
@@ -29,6 +28,7 @@
                 <th class="text-center">Hotel Name</th>
                 <th class="text-center">Address</th>
                 <th class="text-center">City</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
 
@@ -39,6 +39,16 @@
                     <td>{{ $hotel->name }}</td>
                     <td>{{ $hotel->address }}</td>
                     <td>{{ $hotel->city }}</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="{{ route('hotel.edit', $hotel) }}"
+                            role="button">Edit</a>
+                        <form action="{{ route('hotel.destroy', $hotel) }}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini?')">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

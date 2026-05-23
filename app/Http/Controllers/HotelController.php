@@ -56,7 +56,7 @@ class HotelController extends Controller
 
     Hotel::create($validated);
 
-    return to_route('hotel.index')->withSuccess('Data Hotel berhasil ditambahkan');
+    return to_route('hotel.index')->withSuccess('Data Hotel Berhasil Ditambahkan');
     }
 
     /**
@@ -72,7 +72,10 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        //
+         return view('hotel.edit', [
+        'title' => 'Edit Hotel',
+        'hotel' => $hotel,
+    ]);
     }
 
     /**
@@ -80,7 +83,22 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
-        //
+         $validated = $request->validate([
+        'name' => 'required|max:255',
+        'address' => 'required|min:10',
+        'city' => 'required|max:100',
+    ], [
+        'name.required' => 'Nama Hotel Wajib Diisi',
+        'name.max' => 'Nama Hotel Maksimal 255 Karakter',
+        'address.required' => 'Alamat Wajib Diisi',
+        'address.min' => 'Alamat Minimal 10 Karakter',
+        'city.required' => 'Kota Wajib Diisi',
+        'city.max' => 'Kota Maksimal 100 Karakter',
+    ]);
+
+    $hotel->update($validated);
+
+    return to_route('hotel.index')->withSuccess('Data Hotel Berhasil Diubah');
     }
 
     /**
