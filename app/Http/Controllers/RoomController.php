@@ -40,7 +40,10 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('room.create', [
+        'title' => 'Create Room',
+        'hotels' => Hotel::all(),
+    ]);
     }
 
     /**
@@ -48,7 +51,18 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'room_number' => 'required|unique:rooms',
+        'type' => 'required',
+        'price' => 'required|numeric',
+        'capacity' => 'required|numeric',
+        'facilities' => 'required',
+        'hotel_id' => 'required|exists:hotels,id',
+    ]);
+
+    Room::create($request->all());
+
+    return redirect()->route('room.index')->with('success', 'Room Berhasil Ditambahkan');
     }
 
     /**

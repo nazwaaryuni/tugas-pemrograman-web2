@@ -7,6 +7,8 @@
         </div>
     @endsession
 
+    <a href="{{ route('room.create') }}" class="btn btn-primary mb-3">Create</a>
+
     <form action="">
         <div class="row g-3 mb-3">
             <div class="col-md-4">
