@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 #[Fillable(['title', 'author', 'publisher', 'year', 'isbn', 'stock'])]
-class Book extends Model
+class Customer extends Model
 {
-    /** @use HasFactory<\Database\Factories\BookFactory> */
+    /** @use HasFactory<\Database\Factories\CustomerFactory> */
     use HasFactory;
 
     // protected $fillabel = ['title', 'author', 'publisher', 'year', 'isbn', 'stock'];

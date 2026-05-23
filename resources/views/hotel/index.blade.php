@@ -8,6 +8,8 @@
         </div>
     @endsession
 
+    <a class="btn btn-primary mb-3" href="{{ route('hotel.create') }}" role="button">Create</a>
+
     <form action="">
         <div class="row g-3 mb-3">
             <div class="col-md-8">

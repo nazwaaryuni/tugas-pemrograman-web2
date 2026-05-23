@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Customer;
+use Illuminate\Http\Request;
+
+class CustomerController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('customer.index', [
+            'title' => 'Customer',
+            'customers' => Customer::latest()->get(),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('customer.create', ['title' => 'Create Customer']);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+    $validated = $request->validate([
+        'name'        => 'required|max:255',
+        'email'       => 'required|email|unique:customers',
+        'phone'       => 'required|max:15',
+        'birth_date'  => 'required|date',
+        'address'     => 'required',
+    ], [
+        'name.required'        => 'Nama customer wajib diisi',
+        'name.max'             => 'Nama customer tidak boleh lebih dari :max karakter',
+
+        'email.required'       => 'Email wajib diisi',
+        'email.email'          => 'Format email tidak valid',
+        'email.unique'         => 'Email sudah terdaftar',
+
+        'phone.required'       => 'Nomor telepon wajib diisi',
+        'phone.max'            => 'Nomor telepon tidak boleh lebih dari :max karakter',
+
+        'birth_date.required' => 'Tanggal lahir wajib diisi',
+        'birth_date.date'     => 'Format tanggal lahir tidak valid',
+
+        'address.required'    => 'Alamat wajib diisi',
+    ]);
+
+    Customer::create($validated);
+    return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Ditambahkan');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Customer $customer)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Customer $customer)
+    {
+        return view('customer.edit', [
+            'title' => 'Edit Customer',
+            'customer' => $customer,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Customer $customer)
+    {
+        $validated = $request->validate([
+        'name'        => 'required|max:255',
+        'email'       => 'required|email|unique:customers',
+        'phone'       => 'required|max:15',
+        'birth_date'  => 'required|date',
+        'address'     => 'required',
+    ], [
+        'name.required'        => 'Nama customer wajib diisi',
+        'name.max'             => 'Nama customer tidak boleh lebih dari :max karakter',
+
+        'email.required'       => 'Email wajib diisi',
+        'email.email'          => 'Format email tidak valid',
+        'email.unique'         => 'Email sudah terdaftar',
+
+        'phone.required'       => 'Nomor telepon wajib diisi',
+        'phone.max'            => 'Nomor telepon tidak boleh lebih dari :max karakter',
+
+        'birth_date.required' => 'Tanggal lahir wajib diisi',
+        'birth_date.date'     => 'Format tanggal lahir tidak valid',
+
+        'address.required'    => 'Alamat wajib diisi',
+    ]);
+
+    $customer->update($validated);
+    return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Diubah');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Customer $customer)
+    {
+        $customer->delete($customer);
+        return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Dihapus');
+    }
+}

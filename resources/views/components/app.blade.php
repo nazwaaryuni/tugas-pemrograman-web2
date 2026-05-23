@@ -20,7 +20,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" href="{{ route('book.index') }}">Book</a>
+                    <a class="nav-link active" href="{{ route('customer.index') }}">Customer</a>
                     <a class="nav-link active" href="{{ route('hotel.index') }}">Hotel</a>
                 </div>
             </div>

@@ -1,21 +1,21 @@
 <?php
 
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [BookController::class, 'index']);
+Route::get('/', [CustomerController::class, 'index']);
 
-Route::get('/book', [BookController::class, 'index'])->name('book.index');
+Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
 
-Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
+Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
 
-Route::post('/book/store', [BookController::class, 'store'])->name('book.store');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
 
-Route::get('/book/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
+Route::get('/customer/{customer}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
 
-Route::put('/book/{book}', [BookController::class, 'update'])->name('book.update');
+Route::put('/customer/{customer}', [CustomerController::class, 'update'])->name('customer.update');
 
-Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
+Route::delete('/customer/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 
 Route::resource('/hotel', HotelController::class);
