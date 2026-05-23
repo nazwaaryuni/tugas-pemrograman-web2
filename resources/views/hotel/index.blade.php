@@ -7,6 +7,7 @@
         </div>
     @endsession
 
+    <!-- Tombol Create -->
     <a class="btn btn-primary mb-3" href="{{ route('hotel.create') }}" role="button">Create</a>
 
     <form action="">
@@ -40,16 +41,17 @@
                     <td>{{ $hotel->address }}</td>
                     <td>{{ $hotel->city }}</td>
                     <td>
+                        <a class="btn btn-info btn-sm" href="{{ route('hotel.show', $hotel) }}"
+                            role="button">Detail</a>
                         <a class="btn btn-warning btn-sm" href="{{ route('hotel.edit', $hotel) }}"
                             role="button">Edit</a>
                         <form action="{{ route('hotel.destroy', $hotel) }}" method="POST" class="d-inline">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Anda Yakin Ingin Menghapus Data Ini?')">Delete</button>
+                                onclick="return confirm('Anda Yakin Ingin Menghapus Data iIni?')">Delete</button>
                         </form>
                     </td>
-
                 </tr>
             @endforeach
         </tbody>

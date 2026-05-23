@@ -16,8 +16,8 @@ class HotelController extends Controller
     $keyword = request('keyword');
 
     if ($keyword) {
-        $hotels->where('name', 'like', '%' . $keyword . '%')
-               ->orWhere('city', 'like', '%' . $keyword . '%');
+    $hotels     ->where('name', 'like', '%' . $keyword . '%') 
+                ->orWhere('city', 'like', '%' . $keyword . '%');
     }
     
     return view('hotel.index', [
@@ -64,7 +64,10 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        //
+        return view('hotel.show', [
+        'title' => 'Detail Hotel',
+        'hotel' => $hotel,
+    ]);
     }
 
     /**
@@ -106,7 +109,7 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        $hotel->delete();
+        $hotel->delete($hotel);
         return to_route('hotel.index')->withSuccess('Data Hotel Berhasil Dihapus');
     }
 }
