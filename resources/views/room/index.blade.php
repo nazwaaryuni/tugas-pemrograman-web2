@@ -55,13 +55,16 @@
                     <td>{{ $room->facilities }}</td>
                     <td>{{ $room->hotel->name }}</td>
                     <td>
-                        <a href="{{ route('room.edit', $room->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('room.destroy', $room->id) }}" method="POST" class="d-inline"
-                            onsubmit="return confirm('Yakin ingin menghapus Data Room ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
+                        <div class="d-flex flex-column gap-1">
+                            <a href="{{ route('room.show', $room->id) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ route('room.edit', $room->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('room.destroy', $room->id) }}" method="POST"
+                                onsubmit="return confirm('Yakin Ingin Menghapus Room Ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
                     </td>
 
                 </tr>
