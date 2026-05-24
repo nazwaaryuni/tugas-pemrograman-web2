@@ -56,6 +56,12 @@
                     <td>{{ $room->hotel->name }}</td>
                     <td>
                         <a href="{{ route('room.edit', $room->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('room.destroy', $room->id) }}" method="POST" class="d-inline"
+                            onsubmit="return confirm('Yakin ingin menghapus Data Room ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
                     </td>
 
                 </tr>
