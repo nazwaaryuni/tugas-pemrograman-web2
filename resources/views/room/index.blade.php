@@ -41,6 +41,7 @@
                 <th class="text-center">Capacity</th>
                 <th class="text-center">Facilites</th>
                 <th class="text-center">Hotel</th>
+                <th class="text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,10 @@
                     <td>{{ $room->capacity }}</td>
                     <td>{{ $room->facilities }}</td>
                     <td>{{ $room->hotel->name }}</td>
+                    <td>
+                        <a href="{{ route('room.edit', $room->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
+
                 </tr>
             @endforeach
         </tbody>

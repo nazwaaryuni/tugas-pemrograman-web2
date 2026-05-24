@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Room;
 use App\Models\Hotel;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -23,8 +23,8 @@ class RoomController extends Controller
         // pencarian berdasarkan type atau fasilitas
         if ($request->keyword) {
             $rooms->where(function ($query) use ($request) {
-                $query->where('type', 'like', '%' . $request->keyword . '%')
-                      ->orWhere('facilities', 'like', '%' . $request->keyword . '%');
+                $query->where('type', 'like', '%'.$request->keyword.'%')
+                    ->orWhere('facilities', 'like', '%'.$request->keyword.'%');
             });
         }
 
@@ -41,9 +41,9 @@ class RoomController extends Controller
     public function create()
     {
         return view('room.create', [
-        'title' => 'Create Room',
-        'hotels' => Hotel::all(),
-    ]);
+            'title' => 'Create Room',
+            'hotels' => Hotel::all(),
+        ]);
     }
 
     /**
@@ -52,17 +52,17 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'room_number' => 'required|unique:rooms',
-        'type' => 'required',
-        'price' => 'required|numeric',
-        'capacity' => 'required|numeric',
-        'facilities' => 'required',
-        'hotel_id' => 'required|exists:hotels,id',
-    ]);
+            'room_number' => 'required|unique:rooms',
+            'type' => 'required',
+            'price' => 'required|numeric',
+            'capacity' => 'required|numeric',
+            'facilities' => 'required',
+            'hotel_id' => 'required|exists:hotels,id',
+        ]);
 
-    Room::create($request->all());
+        Room::create($request->all());
 
-    return redirect()->route('room.index')->with('success', 'Room Berhasil Ditambahkan');
+        return redirect()->route('room.index')->with('success', 'Data Room Berhasil Ditambahkan');
     }
 
     /**
@@ -78,7 +78,11 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        return view('room.edit', [
+        'title' => 'Edit Room',
+        'room' => $room,
+        'hotels' => Hotel::all(),
+    ]);
     }
 
     /**
@@ -86,7 +90,18 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        //
+         $request->validate([
+        'room_number' => 'required|unique:rooms,room_number,' . $room->id,
+        'type' => 'required',
+        'price' => 'required|numeric',
+        'capacity' => 'required|numeric',
+        'facilities' => 'required',
+        'hotel_id' => 'required|exists:hotels,id',
+    ]);
+
+    $room->update($request->all());
+
+    return redirect()->route('room.index')->with('success', 'Data Room Berhasil Diubah');
     }
 
     /**
