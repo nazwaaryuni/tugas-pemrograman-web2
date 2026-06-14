@@ -153,4 +153,11 @@ public function restore($id)
     $customer->restore();
     return to_route('customer.trash')->withSuccess('Data Customer Berhasil Dipulihkan');
 }
+
+public function forceDelete($id)
+{
+    $customer = Customer::onlyTrashed()->findOrFail($id);
+    $customer->forceDelete();
+    return to_route('customer.trash')->withSuccess('Data Customer Berhasil Dihapus Permanen');
+}
 }
