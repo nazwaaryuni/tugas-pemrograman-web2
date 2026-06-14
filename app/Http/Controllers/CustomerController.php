@@ -146,4 +146,11 @@ class CustomerController extends Controller
         'customers' => Customer::onlyTrashed()->latest()->get(),
     ]);
 }
+
+public function restore($id)
+{
+    $customer = Customer::onlyTrashed()->findOrFail($id);
+    $customer->restore();
+    return to_route('customer.trash')->withSuccess('Data Customer Berhasil Dipulihkan');
+}
 }

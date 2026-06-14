@@ -14,6 +14,7 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Deleted At</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +25,18 @@
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->gender }}</td>
                     <td>{{ $customer->deleted_at }}</td>
+                    <td>
+                        <form action="{{ route('customer.restore', $customer->id) }}" method="POST" class="d-inline">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-warning btn-sm"
+                                onclick="return confirm('Anda Yakin Ingin Mengembalikan Data Ini?')">Restore</button>
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">Tidak ada data di Trash</td>
+                    <td colspan="6">Tidak ada data di Trash</td>
                 </tr>
             @endforelse
         </tbody>
