@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -31,34 +32,42 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:customers',
-            'phone' => 'required|max:15',
-            'birth_date' => 'required|date',
-            'address' => 'required',
-            'gender' => 'required|in:Male,Female',
-        ], [
-            'name.required' => 'Nama customer wajib diisi',
-            'name.max' => 'Nama customer tidak boleh lebih dari :max karakter',
+        DB::beginTransaction();
+        try {
+            $validated = $request->validate([
+                'name' => 'required|max:255',
+                'email' => 'required|email|unique:customers',
+                'phone' => 'required|max:15',
+                'birth_date' => 'required|date',
+                'address' => 'required',
+                'gender' => 'required|in:Male,Female',
+            ], [
+                'name.required' => 'Nama customer wajib diisi',
+                'name.max' => 'Nama customer tidak boleh lebih dari :max karakter',
 
-            'email.required' => 'Email wajib diisi',
-            'email.email' => 'Format email tidak valid',
-            'email.unique' => 'Email sudah terdaftar',
+                'email.required' => 'Email wajib diisi',
+                'email.email' => 'Format email tidak valid',
+                'email.unique' => 'Email sudah terdaftar',
 
-            'phone.required' => 'Nomor telepon wajib diisi',
-            'phone.max' => 'Nomor telepon tidak boleh lebih dari :max karakter',
+                'phone.required' => 'Nomor telepon wajib diisi',
+                'phone.max' => 'Nomor telepon tidak boleh lebih dari :max karakter',
 
-            'birth_date.required' => 'Tanggal lahir wajib diisi',
-            'birth_date.date' => 'Format tanggal lahir tidak valid',
+                'birth_date.required' => 'Tanggal lahir wajib diisi',
+                'birth_date.date' => 'Format tanggal lahir tidak valid',
 
-            'address.required' => 'Alamat wajib diisi',
-        ]);
+                'address.required' => 'Alamat wajib diisi',
+            ]);
 
-        Customer::create($validated);
+            Customer::create($validated);
 
-        return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Ditambahkan');
+            DB::commit();
+            return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Ditambahkan');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withErrors('Terjadi kesalahan: '.$e->getMessage());
+        }
     }
+
 
     /**
      * Display the specified resource.
