@@ -31,31 +31,32 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-    $validated = $request->validate([
-        'name'        => 'required|max:255',
-        'email'       => 'required|email|unique:customers',
-        'phone'       => 'required|max:15',
-        'birth_date'  => 'required|date',
-        'address'     => 'required',
-    ], [
-        'name.required'        => 'Nama customer wajib diisi',
-        'name.max'             => 'Nama customer tidak boleh lebih dari :max karakter',
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:customers',
+            'phone' => 'required|max:15',
+            'birth_date' => 'required|date',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Nama customer wajib diisi',
+            'name.max' => 'Nama customer tidak boleh lebih dari :max karakter',
 
-        'email.required'       => 'Email wajib diisi',
-        'email.email'          => 'Format email tidak valid',
-        'email.unique'         => 'Email sudah terdaftar',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
 
-        'phone.required'       => 'Nomor telepon wajib diisi',
-        'phone.max'            => 'Nomor telepon tidak boleh lebih dari :max karakter',
+            'phone.required' => 'Nomor telepon wajib diisi',
+            'phone.max' => 'Nomor telepon tidak boleh lebih dari :max karakter',
 
-        'birth_date.required' => 'Tanggal lahir wajib diisi',
-        'birth_date.date'     => 'Format tanggal lahir tidak valid',
+            'birth_date.required' => 'Tanggal lahir wajib diisi',
+            'birth_date.date' => 'Format tanggal lahir tidak valid',
 
-        'address.required'    => 'Alamat wajib diisi',
-    ]);
+            'address.required' => 'Alamat wajib diisi',
+        ]);
 
-    Customer::create($validated);
-    return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Ditambahkan');
+        Customer::create($validated);
+
+        return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Ditambahkan');
     }
 
     /**
@@ -83,30 +84,31 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $validated = $request->validate([
-        'name'        => 'required|max:255',
-        'email'       => 'required|email|unique:customers',
-        'phone'       => 'required|max:15',
-        'birth_date'  => 'required|date',
-        'address'     => 'required',
-    ], [
-        'name.required'        => 'Nama customer wajib diisi',
-        'name.max'             => 'Nama customer tidak boleh lebih dari :max karakter',
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:customers,email,'.$customer->id,
+            'phone' => 'required|max:15',
+            'birth_date' => 'required|date',
+            'address' => 'required',
+        ], [
+            'name.required' => 'Nama customer wajib diisi',
+            'name.max' => 'Nama customer tidak boleh lebih dari :max karakter',
 
-        'email.required'       => 'Email wajib diisi',
-        'email.email'          => 'Format email tidak valid',
-        'email.unique'         => 'Email sudah terdaftar',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
 
-        'phone.required'       => 'Nomor telepon wajib diisi',
-        'phone.max'            => 'Nomor telepon tidak boleh lebih dari :max karakter',
+            'phone.required' => 'Nomor telepon wajib diisi',
+            'phone.max' => 'Nomor telepon tidak boleh lebih dari :max karakter',
 
-        'birth_date.required' => 'Tanggal lahir wajib diisi',
-        'birth_date.date'     => 'Format tanggal lahir tidak valid',
+            'birth_date.required' => 'Tanggal lahir wajib diisi',
+            'birth_date.date' => 'Format tanggal lahir tidak valid',
 
-        'address.required'    => 'Alamat wajib diisi',
-    ]);
+            'address.required' => 'Alamat wajib diisi',
+        ]);
 
-    $customer->update($validated);
-    return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Diubah');
+        $customer->update($validated);
+
+        return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Diubah');
     }
 
     /**
@@ -115,6 +117,7 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete($customer);
+
         return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Dihapus');
     }
 }

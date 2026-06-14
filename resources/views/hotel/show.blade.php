@@ -1,8 +1,6 @@
 <x-app>
     <x-slot:title>{{ $title }}</x-slot>
 
-    <a class="btn btn-warning mb-3" href="{{ route('hotel.index') }}" role="button">Back</a>
-
     <h6>Data Hotel</h6>
     <ul class="list-group mb-3">
         <li class="list-group-item">Name: {{ $hotel->name }}</li>
@@ -25,4 +23,9 @@
             <li class="list-group-item">Belum Ada Kamar Terdaftar</li>
         @endforelse
     </ul>
+
+    <div class="d-flex justify-content-start my-3">
+        <a class="btn btn-warning mb-3" href="{{ route('hotel.index') }}" role="button">Back</a>
+    </div>
+
 </x-app>

@@ -29,12 +29,12 @@
     </nav>
 
     {{-- PAGE TITLE --}}
-    <div class="bg-primary py-5 text-center text-white">
+    <div class="bg-dark py-4 text-center text-white">
         <h1 class="fw-bold">{{ $title }}</h1>
     </div>
 
     {{-- MAIN APP --}}
-    <div class="container my-5">
+    <div class="container my-4">
         {{ $slot }}
     </div>
 

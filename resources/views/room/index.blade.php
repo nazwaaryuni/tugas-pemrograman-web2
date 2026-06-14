@@ -7,7 +7,7 @@
         </div>
     @endsession
 
-    <a href="{{ route('room.create') }}" class="btn btn-primary mb-3">Create</a>
+    <a class="btn btn-primary mb-3" href="{{ route('room.create') }}" role="button">Create</a>
 
     <form action="">
         <div class="row g-3 mb-3">
@@ -32,16 +32,16 @@
     </form>
 
     <table class="table table-bordered table-striped">
-        <thead>
+        <thead class="table-success text-center">
             <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">Room Number</th>
-                <th class="text-center">Type</th>
-                <th class="text-center">Price</th>
-                <th class="text-center">Capacity</th>
-                <th class="text-center">Facilites</th>
-                <th class="text-center">Hotel</th>
-                <th class="text-center">Aksi</th>
+                <th class="text-center align-middle"style="width: 2%">No</th>
+                <th class="text-center align-middle"style="width: 4%">Room Number</th>
+                <th class="text-center align-middle"style="width: 5%">Type</th>
+                <th class="text-center align-middle"style="width: 10%">Price</th>
+                <th class="text-center align-middle"style="width: 8%">Capacity</th>
+                <th class="text-center align-middle"style="width: 20%">Facilites</th>
+                <th class="text-center align-middle"style="width: 15%">Hotel Name</th>
+                <th class="text-center align-middle"style="width: 10%">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -55,17 +55,27 @@
                     <td>{{ $room->facilities }}</td>
                     <td>{{ $room->hotel->name }}</td>
                     <td>
-                        <div class="d-flex flex-column gap-1">
-                            <a href="{{ route('room.show', $room->id) }}" class="btn btn-info btn-sm">Show</a>
-                            <a href="{{ route('room.edit', $room->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('room.destroy', $room->id) }}" method="POST"
-                                onsubmit="return confirm('Yakin Ingin Menghapus Room Ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                        <div class="row g-1">
+                            <div class="col-6">
+                                <a href="{{ route('room.edit', $room->id) }}"
+                                    class="btn btn-warning btn-sm w-100">Edit</a>
+                            </div>
+                            <div class="col-6">
+                                <form action="{{ route('room.destroy', $room->id) }}" method="POST"
+                                    onsubmit="return confirm('Anda Yakin Ingin Menghapus Data Ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm w-100">Delete</button>
+                                </form>
+                            </div>
+
+                            <div class="col-12 mt-1">
+                                <a href="{{ route('room.show', $room->id) }}"
+                                    class="btn btn-info btn-sm w-100">Detail</a>
+                            </div>
                         </div>
                     </td>
+
 
                 </tr>
             @endforeach

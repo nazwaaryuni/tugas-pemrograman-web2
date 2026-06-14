@@ -38,7 +38,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">Update</button>
-        <a href="{{ route('room.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('room.index') }}" class="btn btn-warning">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </x-app>

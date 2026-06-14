@@ -93,6 +93,8 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
+
+        dd('ok');
          $request->validate([
         'room_number' => 'required|unique:rooms,room_number,' . $room->id,
         'type' => 'required',
