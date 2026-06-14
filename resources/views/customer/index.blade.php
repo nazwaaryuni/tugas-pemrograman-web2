@@ -13,7 +13,8 @@
             <tr>
                 <th style="width: 2%">No</th>
                 <th style="width: 20%">Name</th>
-                <th style="width: 7%">Email</th>
+                <th style="width: 10%">Gender</th>
+                <th style="width: 5%">Email</th>
                 <th style="width: 20%">Phone</th>
                 <th style="width: 18%">Birth Date</th>
                 <th style="width: 25%">Address</th>
@@ -26,6 +27,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->gender }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->phone }}</td>
                     <td>

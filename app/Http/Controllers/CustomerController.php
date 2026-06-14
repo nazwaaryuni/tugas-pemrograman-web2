@@ -37,6 +37,7 @@ class CustomerController extends Controller
             'phone' => 'required|max:15',
             'birth_date' => 'required|date',
             'address' => 'required',
+            'gender' => 'required|in:Male,Female',
         ], [
             'name.required' => 'Nama customer wajib diisi',
             'name.max' => 'Nama customer tidak boleh lebih dari :max karakter',
@@ -89,6 +90,7 @@ class CustomerController extends Controller
             'phone' => 'required|max:15',
             'birth_date' => 'required|date',
             'address' => 'required',
+            'gender' => 'required|in:Male,Female',
         ], [
             'name.required' => 'Nama customer wajib diisi',
             'name.max' => 'Nama customer tidak boleh lebih dari :max karakter',
