@@ -93,9 +93,11 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+    DB::beginTransaction();
+    try {
         $validated = $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:customers,email,'.$customer->id,
+            'email' => 'required|email|unique:customers,email,' . $customer->id,
             'phone' => 'required|max:15',
             'birth_date' => 'required|date',
             'address' => 'required',
@@ -119,7 +121,13 @@ class CustomerController extends Controller
 
         $customer->update($validated);
 
+        DB::commit();
         return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Diubah');
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return back()->withErrors('Terjadi kesalahan: '.$e->getMessage());
+    }
+}
     }
 
     /**
