@@ -93,8 +93,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-    DB::beginTransaction();
-    try {
+        DB::beginTransaction();
+        try {
         $validated = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:customers,email,' . $customer->id,
@@ -123,13 +123,12 @@ class CustomerController extends Controller
 
         DB::commit();
         return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Diubah');
-    } catch (\Exception $e) {
+    } 
+        catch (\Exception $e) {
         DB::rollBack();
         return back()->withErrors('Terjadi kesalahan: '.$e->getMessage());
+        }
     }
-}
-    }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -139,4 +138,12 @@ class CustomerController extends Controller
 
         return to_route('customer.index')->withSuccess('Data Pelanggan Berhasil Dihapus');
     }
+
+    public function trash()
+{
+    return view('customer.trash', [
+        'title' => 'Trash Customer',
+        'customers' => Customer::onlyTrashed()->latest()->get(),
+    ]);
+}
 }
